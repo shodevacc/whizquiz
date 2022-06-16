@@ -23,9 +23,11 @@ export default function Input({ index, answerlength, correctAnswer, currentAnswe
     React.useEffect(() => {
         const field = fieldRef.current
         const handleKeyDown = (e) => {
-            const isChar = (/[A-Za-z]/).test(String.fromCharCode(e.keyCode))
-            const isBackspace = (e.keyCode || e.charCode) === 8 || (e.keyCode || e.charCode) === 46
-            // console.log('isChar', isChar, 'isBackspace', isBackspace)
+            // console.log(e.key)
+            const input = e.key
+            const isChar = (/^[a-zA-Z]{1}$/).test(input)
+            const isBackspace = input === 'Backspace' || input ==='Delete'
+            console.log(input,'isChar', isChar, 'isBackspace', isBackspace)
             // console.log(String.fromCharCode(e.keyCode).match(/(\w|\s)/g))
             // If all the correct answer is found return
             if (correctAnswer)
@@ -61,9 +63,9 @@ export default function Input({ index, answerlength, correctAnswer, currentAnswe
             document.getElementById(`${index + 1 % answerlength}-character`).focus()
 
         }
-        field.addEventListener('keyup', handleKeyDown)
+        field.addEventListener('keydown', handleKeyDown)
         return () => {
-            field.removeEventListener('keyup', handleKeyDown)
+            field.removeEventListener('keydown', handleKeyDown)
         }
     }, [value, setAnswer, currentAnswerlength])
     return (
