@@ -46,6 +46,16 @@ export default function Input({ setCode, index, answerlength, correctAnswer, cur
     };
     const handleOnInput = (e) => {
         console.log("oninput", e)
+        const { nativeEvent } = e;
+        if (nativeEvent.data === null && nativeEvent.inputType === 'deleteContentBackward') {
+            if (!value.length) {
+                document.getElementById(`${(index - 1) > 0 ? (index - 1) : 0}-character`).focus()
+                return
+            }
+            setAnswer(state => state.slice(0, -1))
+            setValue("")
+            return
+        }
     }
     const handleOnChange = (e) => {
         const { value:input } = e.target;
