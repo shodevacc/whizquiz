@@ -10,7 +10,7 @@ const Title = styled.h3`
 export default function Answers() {
     const [answersToDisplay, setanswersToDisplay] = React.useState([])
     const { questionsCompleted, allAnswers, currentQuestionNumber, isTodayQuiz } = useQuizState()
-    console.log(currentQuestionNumber, 'currentAnswerKey', allAnswers)
+    // console.log(currentQuestionNumber, 'currentAnswerKey', allAnswers)
     React.useEffect(() => {
         if (questionsCompleted) {
             setanswersToDisplay(allAnswers)
@@ -21,7 +21,7 @@ export default function Answers() {
         return () => { }
     }, [currentQuestionNumber, questionsCompleted])
 
-    console.log(answersToDisplay)
+    // console.log(answersToDisplay)
     return (
         <Container>
             {(currentQuestionNumber !== 0) && <>

@@ -10,10 +10,10 @@ export default function Index() {
    
     const [answer, setAnswer] = React.useState("")
     const { currentAnswerKey,setCelebrate, quizCompleted,SetQuizCompleted,incrementQuestion, WordofTheDay, allAnswers } = useQuizState()
-    console.log("wordofday", WordofTheDay, allAnswers)
+    // console.log("wordofday", WordofTheDay, allAnswers)
     const charactersInAnswer = WordofTheDay.split('')
     const correctAnswer = (answer.toLocaleLowerCase() === WordofTheDay.toLocaleLowerCase())
-    console.log('currentAnswerKey', currentAnswerKey, answer)
+    // console.log('currentAnswerKey', currentAnswerKey, answer)
     React.useEffect(() => {
         setAnswer("")
         return () => { }
@@ -33,7 +33,7 @@ export default function Index() {
         setCelebrate(true)
         // window.alert("wohoooooo")
         // else
-        console.log(answer)
+        // console.log(answer)
 
     }
     return (

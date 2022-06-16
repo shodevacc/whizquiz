@@ -16,10 +16,10 @@ export default function SelectQuiz() {
     // console.log("ALL QUIZ", AllQuiz)
     const { SetQuizNumber, quizNumber, isTodayQuiz } = useQuizState()
     const handleChange = (e) => {
-        console.log(e.target.value)
+        // console.log(e.target.value)
         SetQuizNumber(e.target.value)
     }
-    console.log("Check", isTodayQuiz)
+    // console.log("Check", isTodayQuiz)
     return (
         <>
             <Container>

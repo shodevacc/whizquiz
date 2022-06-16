@@ -19,13 +19,13 @@ const StyledInput = styled.input`
 export default function Input({ index, answerlength, correctAnswer, currentAnswerlength, setAnswer }) {
     const fieldRef = React.useRef()
     const [value, setValue] = React.useState("")
-    console.log('input', !(answerlength === currentAnswerlength))
+    // console.log('input', !(answerlength === currentAnswerlength))
     React.useEffect(() => {
         const field = fieldRef.current
         const handleKeyDown = (e) => {
             if (correctAnswer)
                 return
-            console.log("KEUDOWN")
+            // console.log("KEUDOWN")
             if (e.keyCode === 8) {
                 if(!value.length){
                     document.getElementById(`${(index - 1) > 0 ? (index - 1 ) : 0}-character`).focus()
@@ -38,7 +38,7 @@ export default function Input({ index, answerlength, correctAnswer, currentAnswe
                 return
             }
             if (answerlength === currentAnswerlength) {
-                console.log("KEUDOWN no input")
+                // console.log("KEUDOWN no input")
                 return
             }
             if(value.length){

@@ -68,9 +68,9 @@ export const QuizProvider = ({ children }) => {
         setQuizCompleted(true)
     }
     const incrementQuestion = () => {
-        console.log('isTodayQuiz', isTodayQuiz)
+        // console.log('isTodayQuiz', isTodayQuiz)
         if (currentQuestionNumber + 1 < numberOfQuestions) {
-            console.log("NOT DONE", currentQuestionNumber)
+            // console.log("NOT DONE", currentQuestionNumber)
             if (isTodayQuiz)
                 localStorage.setItem('initialState', JSON.stringify({ currentQuestion: currentQuestionNumber + 1, questionsCompleted: false, quizCompleted: false, date: QuizOfTheDay.date }))
             setCurrentQuestion(state => state + 1)

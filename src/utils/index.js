@@ -1,5 +1,5 @@
 export const setAnswerColor = (answer, correctAnswer) => {
-    console.log("CHECK THIS",answer,correctAnswer)
+    // console.log("CHECK THIS",answer,correctAnswer)
     var currentAnswer = answer.toLowerCase()
     var correctAnswerLower = correctAnswer.toLowerCase()
     currentAnswer.split("").forEach((char, index) => {

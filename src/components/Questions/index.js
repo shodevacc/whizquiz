@@ -12,7 +12,7 @@ export default function Index() {
     const { currentAnswerKey, incrementQuestion,currentQuestionNumber } = useQuizState()
     const charactersInAnswer = currentAnswerKey.answer.split('')
     const correctAnswer = (answer === currentAnswerKey.answer)
-    console.log('currentAnswerKey', currentAnswerKey, answer)
+    // console.log('currentAnswerKey', currentAnswerKey, answer)
     React.useEffect(() => {
         setAnswer("")
         return () => { }
@@ -26,7 +26,7 @@ export default function Index() {
         }
         incrementQuestion()
         // else
-        console.log(answer)
+        // console.log(answer)
     }
     React.useEffect(()=>{
         setAnswerColor(answer,currentAnswerKey.answer)
