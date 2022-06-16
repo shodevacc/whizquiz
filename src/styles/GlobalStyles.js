@@ -84,7 +84,7 @@ const GlobalStyle = createGlobalStyle`
       color:#fff;
       border-radius: 20px;
       font-weight:600;
-      background:${({ theme }) => theme.colors.blue};
+      background:${({ theme }) => theme.colors.light_blue};
     }
     .subtitle{
       color:${({ theme }) => theme.colors.purple_light};
