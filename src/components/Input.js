@@ -61,9 +61,9 @@ export default function Input({ index, answerlength, correctAnswer, currentAnswe
             document.getElementById(`${index + 1 % answerlength}-character`).focus()
 
         }
-        field.addEventListener('keydown', handleKeyDown)
+        field.addEventListener('keyup', handleKeyDown)
         return () => {
-            field.removeEventListener('keydown', handleKeyDown)
+            field.removeEventListener('keyup', handleKeyDown)
         }
     }, [value, setAnswer, currentAnswerlength])
     return (
