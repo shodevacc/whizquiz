@@ -16,14 +16,15 @@ const StyledInput = styled.input`
     }
 `
 
-export default function Input({ index, answerlength, correctAnswer, currentAnswerlength, setAnswer }) {
+export default function Input({ setCode, index, answerlength, correctAnswer, currentAnswerlength, setAnswer }) {
     const fieldRef = React.useRef()
     const [value, setValue] = React.useState("")
     // console.log('input', !(answerlength === currentAnswerlength))
     React.useEffect(() => {
         const field = fieldRef.current
         const handleKeyDown = (e) => {
-            // console.log(e.key)
+            console.log(e)
+            setCode(e.key)
             const input = e.key
             const isChar = (/^[a-zA-Z]{1}$/).test(input)
             const isBackspace = input === 'Backspace' || input ==='Delete'
