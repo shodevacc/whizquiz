@@ -23,26 +23,35 @@ export default function Input({ index, answerlength, correctAnswer, currentAnswe
     React.useEffect(() => {
         const field = fieldRef.current
         const handleKeyDown = (e) => {
+            const isChar = (/[A-Za-z]/).test(String.fromCharCode(e.keyCode))
+            const isBackspace = (e.keyCode || e.charCode) === 8 || (e.keyCode || e.charCode) === 46
+            // console.log('isChar', isChar, 'isBackspace', isBackspace)
+            // console.log(String.fromCharCode(e.keyCode).match(/(\w|\s)/g))
+            // If all the correct answer is found return
             if (correctAnswer)
                 return
             // console.log("KEUDOWN")
-            if (e.keyCode === 8) {
-                if(!value.length){
-                    document.getElementById(`${(index - 1) > 0 ? (index - 1 ) : 0}-character`).focus()
+            if (isBackspace) {
+                if (!value.length) {
+                    document.getElementById(`${(index - 1) > 0 ? (index - 1) : 0}-character`).focus()
                     return
                 }
-                  
+
                 // document.getElementById(`${(index - 1) > 0 ? (index - 1 ) : 0}-character`).focus()
                 setAnswer(state => state.slice(0, -1))
                 setValue("")
                 return
             }
+            // If all the empty fields are filled disable input
             if (answerlength === currentAnswerlength) {
                 // console.log("KEUDOWN no input")
                 return
             }
-            if(value.length){
-                setAnswer(state => state.slice(0,-1) + e.key)
+            // If character is inputted
+            if (!isChar)
+                return
+            if (value.length) {
+                setAnswer(state => state.slice(0, -1) + e.key)
                 setValue(e.key)
                 document.getElementById(`${index + 1 % answerlength}-character`).focus()
                 return
