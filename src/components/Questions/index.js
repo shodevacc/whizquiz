@@ -2,15 +2,14 @@ import React from 'react'
 import styled from 'styled-components';
 import Input from 'components/Input'
 import { setAnswerColor } from 'utils'
-import { Title, Container, QuestionNumber, Button } from 'components/styled'
+import {Title, Container,QuestionNumber,Button} from 'components/styled'
 import { useQuizState } from 'state'
-import OtpInput from 'react-otp-input';
 
 
 export default function Index() {
     const [currentCharacter, setCurrentCharacter] = React.useState(0)
     const [answer, setAnswer] = React.useState("")
-    const { currentAnswerKey, incrementQuestion, currentQuestionNumber } = useQuizState()
+    const { currentAnswerKey, incrementQuestion,currentQuestionNumber } = useQuizState()
     const charactersInAnswer = currentAnswerKey.answer.split('')
     const correctAnswer = (answer === currentAnswerKey.answer)
     // console.log('currentAnswerKey', currentAnswerKey, answer)
@@ -29,24 +28,17 @@ export default function Index() {
         // else
         // console.log(answer)
     }
-    React.useEffect(() => {
-        setAnswerColor(answer, currentAnswerKey.answer)
-        return () => { }
-    }, [answer, currentAnswerKey.answer])
-    const [code, setCode] = React.useState('')
-    const [state, setState] = React.useState('')
-    console.log("INPUT", state)
-    const handleChange = (otp) => setState(otp);
+    React.useEffect(()=>{
+        setAnswerColor(answer,currentAnswerKey.answer)
+        return ()=>{}
+    },[answer,currentAnswerKey.answer])
+    const [code,setCode] = React.useState('')
     return (
         <Container>
-            <QuestionNumber className='smallTitle'>Question: {currentQuestionNumber + 1}</QuestionNumber>
-            <Title style={{ textTransform: 'capitalize' }}>{currentAnswerKey.question}</Title>
+            <QuestionNumber className='smallTitle'>Question: {currentQuestionNumber+1}</QuestionNumber>
+            <Title style={{textTransform:'capitalize'}}>{currentAnswerKey.question}</Title>
             {code}
-            <OtpInput value={state}
-                onChange={handleChange}
-                numInputs={6}
-                separator={<span>-</span>} />
-            {/* <form className="form" onSubmit={handleSubmit}>
+            <form className="form" onSubmit={handleSubmit}>
                 <div className='keys'>
                 {charactersInAnswer.map((char, index) => {
                     return (
@@ -60,7 +52,7 @@ export default function Index() {
                 {correctAnswer ? <p className='subtitle'>Thats the correct answer. Letter <span style={{textTransform:'capitalize',color:'#E85AFF', fontWeight:"600"}}>"{charactersInAnswer[0]}"</span> will be used to unscramble the word of the day</p> :
                     charactersInAnswer.length === answer.length ? <p className='subtitle'>Incorrect</p> : null}
                 <Button type="submit" disabled={!(answer.length === charactersInAnswer.length)}>Next</Button>
-            </form> */}
+            </form>
         </Container>
     )
 }
