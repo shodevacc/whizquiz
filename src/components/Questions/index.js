@@ -33,7 +33,7 @@ export default function Index() {
         return ()=>{}
     },[answer,currentAnswerKey.answer])
     const [code,setCode] = React.useState('')
-    console.log(answer,currentAnswerKey.answer)
+    // console.log(answer,currentAnswerKey.answer)
     return (
         <Container>
             <QuestionNumber className='smallTitle'>Question: {currentQuestionNumber+1}</QuestionNumber>

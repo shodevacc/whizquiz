@@ -24,20 +24,21 @@ const SPACEBAR = 32;
 
 
 export default function Input({ setCode, index, answerlength, correctAnswer, currentAnswerlength, setAnswer }) {
-    const fieldRef = React.useRef()
     const [value, setValue] = React.useState("")
-    // console.log('input', !(answerlength === currentAnswerlength))
-    // React.useEffect(() => {
-    const field = fieldRef.current
+
+    // Handle cases of backspace, delete
     const handleOnKeyDown = (e) => {
+        console.log('onKey')
         const isBackspace = e.keyCode === BACKSPACE || e.key === 'Backspace'
         const isDelete = e.keyCode === DELETE || e.key === 'Delete'
         if (isBackspace || isDelete) {
+            // Empty Space Delete Operation
             if (!value.length) {
+                console.log("DELETE EMPTY SPACE")
                 document.getElementById(`${(index - 1) > 0 ? (index - 1) : 0}-character`).focus()
                 return
             }
-
+            console.log("DELETE NON EMPTY SPACE")
             // document.getElementById(`${(index - 1) > 0 ? (index - 1 ) : 0}-character`).focus()
             setAnswer(state => state.slice(0, -1))
             setValue("")
@@ -45,20 +46,24 @@ export default function Input({ setCode, index, answerlength, correctAnswer, cur
         }
     };
     const handleOnInput = (e) => {
-        console.log("oninput", e)
+        console.log('onINput')
+         // This is a workaround for dealing with keyCode "229 Unidentified" on Android.
         const { nativeEvent } = e;
         if (nativeEvent.data === null && nativeEvent.inputType === 'deleteContentBackward') {
             if (!value.length) {
+                console.log("DELETE EMPTY SPACE IN INput")
                 document.getElementById(`${(index - 1) > 0 ? (index - 1) : 0}-character`).focus()
                 return
             }
+            console.log("DELETE NON EMPTY SPACE IN INput")
             setAnswer(state => state.slice(0, -1))
             setValue("")
             return
         }
     }
     const handleOnChange = (e) => {
-        const { value:input } = e.target;
+        console.log('ocChnage')
+        const { value: input } = e.target;
         const isChar = (/^[a-zA-Z]{1}$/).test(input)
         if (correctAnswer)
             return
@@ -73,62 +78,23 @@ export default function Input({ setCode, index, answerlength, correctAnswer, cur
         // If value is not zero replace the last character of input
         // console.log('valuelength',value,value.length)
         if (value.length) {
-            console.log("setting here man")
+            // console.log("setting here man")
             setAnswer(state => state.slice(0, -1) + input)
             setValue(input)
             document.getElementById(`${index + 1 % answerlength}-character`).focus()
             return
         }
-        console.log("setting here")
+        // console.log("setting here")
         setAnswer(state => state + input)
         setValue(input)
         document.getElementById(`${index + 1 % answerlength}-character`).focus()
 
-        console.log('onchange', input)
-        // if (this.isInputValueValid(value)) {
-        //     this.changeCodeAtFocus(value);
-        // }
-    }
-    const handleKeyDown = (e) => {
-        const input = e.key
-        console.log(e)
-        setCode(e.key)
-
-        const isChar = (/^[a-zA-Z]{1}$/).test(input)
-        const isBackspace = input === 'Backspace' || input === 'Delete'
-        console.log(input, 'isChar', isChar, 'isBackspace', isBackspace)
-        // console.log(String.fromCharCode(e.keyCode).match(/(\w|\s)/g))
-        // If all the correct answer is found return
-        if (correctAnswer)
-            return
-        // console.log("KEUDOWN")
-
-        // If all the empty fields are filled disable input
-        if (answerlength === currentAnswerlength) {
-            // console.log("KEUDOWN no input")
-            return
-        }
-        // If character is inputted
-        if (!isChar)
-            return
-        if (value.length) {
-            setAnswer(state => state.slice(0, -1) + e.key)
-            setValue(e.key)
-            document.getElementById(`${index + 1 % answerlength}-character`).focus()
-            return
-        }
-        setAnswer(state => state + e.key)
-        setValue(e.key)
-        document.getElementById(`${index + 1 % answerlength}-character`).focus()
+        // console.log('onchange', input)
 
     }
-    // field.addEventListener('keydown', handleKeyDown)
-    // return () => {
-    //     field.removeEventListener('keydown', handleKeyDown)
-    // }
-    // }, [value, setAnswer, currentAnswerlength])
+
 
     return (
-        <StyledInput onChange={handleOnChange} onInput={handleOnInput} onKeyDown={handleOnKeyDown} correctAnswer={correctAnswer} firstCharacter={index === 0} id={`${index}-character`} ref={fieldRef} type="text" value={value} maxLength={1} />
+        <StyledInput onChange={handleOnChange} onInput={handleOnInput} onKeyDown={handleOnKeyDown} correctAnswer={correctAnswer} firstCharacter={index === 0} id={`${index}-character`} type="text" value={value} maxLength={1} />
     )
 }
