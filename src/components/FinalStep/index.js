@@ -41,7 +41,7 @@ export default function Index() {
     return (
         <>
             <Container>
-                <h2 style={{ textTransform: 'capitalize' }}>Unscramble the “First
+                <h2 style={{ textTransform: 'capitalize', textAlign: 'center' }}>Unscramble the “First
                     Letters” of your answers
                     to guess the word of the
                     day</h2>
