@@ -11,7 +11,7 @@ export default function Index() {
     const [answer, setAnswer] = React.useState("")
     const { currentAnswerKey, incrementQuestion,currentQuestionNumber } = useQuizState()
     const charactersInAnswer = currentAnswerKey.answer.split('')
-    const correctAnswer = (answer === currentAnswerKey.answer)
+    const correctAnswer = (answer.toLowerCase() === currentAnswerKey.answer.toLowerCase())
     // console.log('currentAnswerKey', currentAnswerKey, answer)
     React.useEffect(() => {
         setAnswer("")
@@ -36,7 +36,7 @@ export default function Index() {
     // console.log(answer,currentAnswerKey.answer)
     return (
         <Container>
-            {answer}
+            {/* {answer} */}
             <QuestionNumber className='smallTitle'>Question: {currentQuestionNumber+1}</QuestionNumber>
             <Title style={{textTransform:'capitalize'}}>{currentAnswerKey.question}</Title>
             {code}
