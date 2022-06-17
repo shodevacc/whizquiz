@@ -36,6 +36,7 @@ export default function Index() {
     // console.log(answer,currentAnswerKey.answer)
     return (
         <Container>
+            {answer}
             <QuestionNumber className='smallTitle'>Question: {currentQuestionNumber+1}</QuestionNumber>
             <Title style={{textTransform:'capitalize'}}>{currentAnswerKey.question}</Title>
             {code}
