@@ -22,8 +22,10 @@ const RIGHT_ARROW = 39;
 const DELETE = 46;
 const SPACEBAR = 32;
 
-
-export default function Input({ setCode, index, answerlength, correctAnswer, currentAnswerlength, setAnswer }) {
+String.prototype.replaceAt = function(index, replacement) {
+    return this.substring(0, index) + replacement + this.substring(index + replacement.length);
+}
+export default function Input({ answer,setCode, index, answerlength, correctAnswer, currentAnswerlength, setAnswer }) {
     const [value, setValue] = React.useState("")
 
     // Handle cases of backspace, delete
@@ -38,9 +40,9 @@ export default function Input({ setCode, index, answerlength, correctAnswer, cur
                 document.getElementById(`${(index - 1) > 0 ? (index - 1) : 0}-character`).focus()
                 return
             }
-            console.log("DELETE NON EMPTY SPACE")
+            console.log("DELETE NON EMPTY SPACE on key",index,answer,answer.slice(0,index), answer.slice(index+1))
             // document.getElementById(`${(index - 1) > 0 ? (index - 1 ) : 0}-character`).focus()
-            setAnswer(state => state.slice(0, -1))
+            setAnswer(state => state.replaceAt(index,'#'))
             setValue("")
             return
         }
@@ -55,8 +57,9 @@ export default function Input({ setCode, index, answerlength, correctAnswer, cur
                 document.getElementById(`${(index - 1) > 0 ? (index - 1) : 0}-character`).focus()
                 return
             }
-            console.log("DELETE NON EMPTY SPACE IN INput")
-            setAnswer(state => state.slice(0, -1))
+            const ans =answer
+            console.log("DELETE NON EMPTY SPACE IN INput",index,ans,ans.slice(0,index), ans.slice(index+1))
+            setAnswer(state => state.replaceAt(index,'#'))
             setValue("")
             return
         }
@@ -68,7 +71,7 @@ export default function Input({ setCode, index, answerlength, correctAnswer, cur
         if (correctAnswer)
             return
         // If all the empty fields are filled disable input
-        if (answerlength === currentAnswerlength) {
+        if (!answer[index]==='#') {
             // console.log("KEUDOWN no input")
             return
         }
@@ -79,13 +82,14 @@ export default function Input({ setCode, index, answerlength, correctAnswer, cur
         // console.log('valuelength',value,value.length)
         if (value.length) {
             // console.log("setting here man")
-            setAnswer(state => state.slice(0, -1) + input)
+            setAnswer(state => state.replaceAt(index,input))
             setValue(input)
             document.getElementById(`${index + 1 % answerlength}-character`).focus()
             return
         }
         // console.log("setting here")
-        setAnswer(state => state + input)
+        setAnswer(state => state.replaceAt(index,input))
+        // setAnswer(state => state + input)
         setValue(input)
         document.getElementById(`${index + 1 % answerlength}-character`).focus()
 

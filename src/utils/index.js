@@ -22,3 +22,10 @@ export const setAnswerColor = (answer, correctAnswer) => {
         }
     })
 }
+
+export const initialiseAnswer = (length) => {
+    var char = ""
+    for (let i = 0; i < length; i++)
+        char += '#'
+    return char
+}
